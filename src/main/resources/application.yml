@@ -1,6 +1,6 @@
 dockerfile: /Users/an/IdeaProjects/k8s-operator-api-generator/src/main/resources/Dockerfile
 project:
-  key: project
+  key: app
   port: 8080
 
 javaoperatorsdk:

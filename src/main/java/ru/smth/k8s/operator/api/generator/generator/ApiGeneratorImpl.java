@@ -27,6 +27,7 @@ public class ApiGeneratorImpl implements ApiGenerator {
         buildJar(builder, path);
         copyDockerFile(builder, path);
         buildImage(builder, path, uid);
+        pushImage(builder, path, uid);
     }
 
     private Path generateFiles(String api, String uid, ProcessBuilder builder) {
@@ -59,7 +60,13 @@ public class ApiGeneratorImpl implements ApiGenerator {
 
     private void buildImage(ProcessBuilder builder, Path path, String uid) {
         builder.directory(path.toFile());
-        builder.command("docker", "build", "-t", uid, ".");
+        builder.command("docker", "build", "-t", "morzianka/test:" + uid, ".");
+        process(builder);
+    }
+
+    private void pushImage(ProcessBuilder builder, Path path, String uid) {
+        builder.directory(path.toFile());
+        builder.command("docker", "push", "morzianka/test:" + uid);
         process(builder);
     }
 

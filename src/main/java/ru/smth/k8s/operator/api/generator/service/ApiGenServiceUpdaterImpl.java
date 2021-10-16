@@ -2,9 +2,9 @@ package ru.smth.k8s.operator.api.generator.service;
 
 import io.fabric8.kubernetes.api.model.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import ru.smth.k8s.operator.api.generator.cr.ApiGenCr;
 import ru.smth.k8s.operator.api.generator.meta.ApiGenMetaService;
+import ru.smth.k8s.operator.api.generator.props.ProjectProps;
 
 import java.util.Map;
 
@@ -16,23 +16,18 @@ import java.util.Map;
 public class ApiGenServiceUpdaterImpl implements ApiGenServiceUpdater {
 
     private final ApiGenMetaService metaService;
-
-    @Value("${project.key}")
-    private String key;
-
-    @Value("${project.port}")
-    private Integer port;
+    private final ProjectProps projectProps;
 
     @Override
     public Service update(ApiGenCr cr) {
         return new ServiceBuilder()
             .withMetadata(metaService.update(cr))
             .withSpec(new ServiceSpecBuilder()
-                .withSelector(Map.of(key, cr.getMetadata().getName()))
+                .withSelector(Map.of(projectProps.getKey(), cr.getMetadata().getName()))
                 .withPorts(new ServicePortBuilder()
-                    .withPort(port)
+                    .withPort(projectProps.getPort())
                     .withTargetPort(new IntOrStringBuilder()
-                        .withIntVal(port)
+                        .withIntVal(projectProps.getPort())
                         .build())
                     .build())
                 .build())

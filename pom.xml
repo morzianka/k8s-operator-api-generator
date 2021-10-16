@@ -36,12 +36,13 @@
             <scope>provided</scope>
         </dependency>
 
-        <dependency>
-            <groupId>io.fabric8</groupId>
-            <artifactId>crd-generator-apt</artifactId>
-            <version>${crd-generator-apt.version}</version>
-            <scope>provided</scope>
-        </dependency>
+        <!-- conflicts wth sdk -->
+        <!--        <dependency>-->
+        <!--            <groupId>io.fabric8</groupId>-->
+        <!--            <artifactId>crd-generator-apt</artifactId>-->
+        <!--            <version>${crd-generator-apt.version}</version>-->
+        <!--            <scope>provided</scope>-->
+        <!--        </dependency>-->
 
         <!-- Test -->
         <dependency>
