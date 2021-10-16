@@ -1,0 +1,11 @@
+dockerfile: /Users/an/IdeaProjects/k8s-operator-api-generator/src/main/resources/Dockerfile
+project:
+  key: app
+  port: 8080
+
+javaoperatorsdk:
+  client:
+    openshift: false
+  controllers:
+    - retry:
+        maxAttempts: 5
